@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>使用说明</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../static/css/morris.css" type="text/css"/>
+<link rel="stylesheet" href="../static/css/jquery.dataTables.min.css" type="text/css"/>
+<!-- Graph CSS -->
+<link href="../static/css/font-awesome.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<!-- //jQuery -->
+<!-- chart -->
+<script src="../static/js/echarts.min.js"></script>
+<script src="../static/js/datatables.min.js"></script>
+<!-- //chart -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> -->
+<!-- lined-icons -->
+<link rel="stylesheet" href="../static/css/icon-font.min.css" type='text/css' />
+</head> 
+<body>
+   <div class="page-container">
+   <!--/content-inner-->
+<div class="left-content">
+	   <div class="mother-grid-inner">
+              <!--header start here-->
+				<div class="header-main">
+					<div class="logo-w3-agile">
+								<h1><a href="#">使用说明</a></h1>
+							</div>	
+				<div class="clearfix"> </div>	
+				</div>
+<!--heder end here-->
+
+
+		<!--<ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="info.html">Home</a><i class="fa fa-angle-right"></i>Maps</li>
+            </ol>-->
+	<div class="map">
+<p>
+	<span style="color:#333333;line-height:1.5;font-family:'Microsoft YaHei';font-size:18px;"><strong>使用说明</strong></span>
+</p>
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;">本系统主要用于库存数据预测，辅助进行库存管理。可以对未来12个月内的任意时间点进行库存数据预测，同时可以指定任意时间跨度的数据作为预测依据，系统采用了融合了深度学习的时间序列预测算法，高效准确地一站式解决库存数据的预测问题。</span><br />
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;"> 本系统使用方法如下：</span><br />
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;"> 1、库存数据按照年度月份整理为一个标准csv文件，共分为两列，一列标题为date，为日期数据，一列标题为x，为库存量数据。</span><br />
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;"> 2、进入库存预测系统页面，点击上传按钮，选择对应数据的csv文件。</span><br />
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;"> 3、设定时间跨度作为预测的依据，设定需要向前预测的步数。</span><br />
+<span style="color:#666666;font-family:'Microsoft YaHei';font-size:16px;"> 4、点击上传按钮，即可获得数据表格、预测柱状图和变化趋势图。</span> 
+<p>
+	<br />
+</p>
+
+		
+	</div>
+<!-- script-for sticky-nav -->
+		<script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-main").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop(); 
+				if(scrollpos >=navoffeset){
+					$(".header-main").addClass("fixed");
+				}else{
+					$(".header-main").removeClass("fixed");
+				}
+			 });
+			 
+		});
+		</script>
+		<!-- /script-for sticky-nav -->
+<!--inner block start here-->
+<div class="inner-block">
+
+</div>
+<!--inner block end here-->
+<!--copy rights start here-->
+<div class="copyrights">
+	 <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="#"></a></p>
+</div>	
+<!--COPY rights end here-->
+</div>
+</div>
+  <!--//content-inner-->
+		<!--/sidebar-menu-->
+				<div class="sidebar-menu">
+					<header class="logo1">
+						<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
+					</header>
+						<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+                        <div class="menu">
+									<ul id="menu" >
+										<li><a href="/home"><i class="fa fa-tachometer"></i> <span>欢迎</span><div class="clearfix"></div></a></li>
+									<li id="menu-academico" ><a href="/uploadFile/report"><i class="fa fa-bar-chart"></i><span>库存预测系统</span><div class="clearfix"></div></a></li>
+									<li id="menu-academico" ><a href="/doc"><i class="fa fa-exclamation-triangle"></i><span>使用说明</span><div class="clearfix"></div></a></li>
+									 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> 附带工具</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+										   <ul id="menu-academico-sub" >
+										   <li id="menu-academico-avaliacoes" ><a href="icons.html">计算器</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="typography.html">日历</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="faq.html">备忘录</a></li>
+										  </ul>
+										</li>
+								  </ul>
+								</div>
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
+							<script>
+							var toggle = true;
+										
+							$(".sidebar-icon").click(function() {                
+							  if (toggle)
+							  {
+								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+								$("#menu span").css({"position":"absolute"});
+							  }
+							  else
+							  {
+								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+								setTimeout(function() {
+								  $("#menu span").css({"position":"relative"});
+								}, 400);
+							  }
+											
+											toggle = !toggle;
+										});
+							</script>
+<!--js -->
+<script src="../static/js/jquery.nicescroll.js"></script>
+<script src="../static/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+   <script src="../static/js/bootstrap.min.js"></script>
+   <!-- /Bootstrap Core JavaScript -->	   
+
+</body>
+</html>

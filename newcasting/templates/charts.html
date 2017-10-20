@@ -1,0 +1,468 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>预测信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="../static/css/morris.css" type="text/css"/>
+<link rel="stylesheet" href="../static/css/jquery.dataTables.min.css" type="text/css"/>
+<!-- Graph CSS -->
+<link href="../static/css/font-awesome.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<!-- //jQuery -->
+<!-- chart -->
+<script src="../static/js/echarts.min.js"></script>
+<script src="../static/js/datatables.min.js"></script>
+<!-- //chart -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> -->
+<!-- lined-icons -->
+<link rel="stylesheet" href="../static/css/icon-font.min.css" type='text/css' />
+<!-- //lined-icons -->
+<style>
+.inputfile input{position:absolute; right:; top:; font-size:20px; opacity:0;padding-left:0px;padding-bottom:0px;padding-top:0px; filter:alpha(opacity=0);height:25px;width:50px}
+
+
+
+
+
+
+</style>
+</head> 
+<body>
+   <div class="page-container">
+   <!--/content-inner-->
+<div class="left-content">
+	   <div class="mother-grid-inner">
+                          <!--header start here-->
+				<div class="header-main">
+					<div class="logo-w3-agile">
+								<h1><a href="#">库存预测系统</a></h1>
+							</div>	
+				<div class="clearfix"> </div>	
+				</div>
+<!--heder end here-->
+		<!--<ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="info.html">Home</a><i class="fa fa-angle-right"></i>Charts</li>
+            </ol>-->
+			
+
+			
+	<div>		
+	<form enctype="multipart/form-data" method="POST" action="/uploadFile/report">
+		
+       {% csrf_token %}
+		
+       <br/>
+       {{ form }}
+	   <br/>
+	   <a href="#"  class="inputfile btn-primary btn" style="width:131px; height:40px; text-align:center;" ><input type="file" name="myfile" id="myfile" />上传文件</a></span>
+       <input type="submit" value="upload" style="width:131px; height:40px;" class="btn-primary btn" />
+    </form>		
+	</div>
+	<div id="wtable" width="90%">
+		<h4 style="text-align: center;">
+				<span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;"><strong>历年需求量表</strong></span>
+		</h4>
+		<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>年份</th>
+                <th>一月</th>
+                <th>二月</th>
+                <th>三月</th>
+                <th>四月</th>
+                <th>五月</th>
+				<th>六月</th>
+				<th>七月</th>
+				<th>八月</th>
+				<th>九月</th>
+				<th>十月</th>
+				<th>十一月</th>
+				<th>十二月</th>
+				<th>总量</th>
+            </tr>
+        </thead>
+        <tfoot>
+			    <tr>
+                <th>年份</th>
+                <th>一月</th>
+                <th>二月</th>
+                <th>三月</th>
+                <th>四月</th>
+                <th>五月</th>
+				<th>六月</th>
+				<th>七月</th>
+				<th>八月</th>
+				<th>九月</th>
+				<th>十月</th>
+				<th>十一月</th>
+				<th>十二月</th>
+				<th>总量</th>
+            </tr>
+            <!--<tr>
+                <th>年份</th>
+                <th>一月</th>
+                <th>二月</th>
+                <th>三月</th>
+                <th>四月</th>
+                <th>五月</th>
+            </tr>表尾-->
+        </tfoot>
+        <tbody id="tabletd">          
+        </tbody>
+    </table>
+		<script>	
+			$(document).ready(function() {
+			$('#example').DataTable({
+				 
+				"scrollY":  "400px",
+				"scrollCollapse": true,
+				"paging": false			
+			});
+		} );</script>
+</div>					
+	<div style="height:1px;
+ width:100%;
+ background:#364155;
+ overflow:hidden;
+ margin-top:10px
+ "></div>
+		<div class="w3-agile-chat">				
+				<div class="charts">
+					<div class="col-md-6 w3ls-high">
+						 <div id="main16" style="width: ;height:400px;"></div>
+						 
+					</div>
+					<div class="col-md-6 w3ls-high">
+						 <div id="main17" style="width: ;height:400px;"></div>
+						 
+					</div>	
+				</div>
+				<div class="clearfix"> </div>
+				<div class="charts">
+
+					<div >
+						 
+						 <div id="year" style="width:100%: ;height:400px;"></div>
+					</div>	
+				</div>					
+					
+					<div class="clearfix"> </div>
+							<script type="text/javascript">
+								// 基于准备好的dom，初始化echarts实例
+							var myChart = echarts.init(document.getElementById('main17'));
+							var myChart2 = echarts.init(document.getElementById('year'));
+							var myChart3 = echarts.init(document.getElementById('main16'));
+							
+								// 指定图表的配置项和数据
+							var List = {{ List|safe }};
+							var List2 = {{ List2|safe }};
+							var List3 = {{ List3|safe }};
+                                var List4 = {{ List4|safe }};
+                            var strs='年备件需求预测量'
+                            console.log(List)	
+							var data=[];
+							var date=[];
+                                var Dict = {{ Dict|safe }};
+							//表格处理开始
+							var htd=" ";
+							for(var j in Dict){
+							htd+='<tr><td>'+j+'</td>';
+								for(var k=0;k<13;k++){
+									htd+='<td>'+Dict[j][k]+'</td>';
+								}
+								htd+='</tr>'
+							}
+							document.getElementById('tabletd').innerHTML = htd;
+							console.log(htd)
+							//表格处理结束
+							var tempstr=""
+							for(var j in Dict){
+								Dict[j].pop();
+								data=data.concat(Dict[j]);
+								for (var k=1;k<13;k++ ){
+								var a="";
+								a+=j+'/'+k;
+								date.push(a);
+								console.log(a);
+								}
+								tempstr=j
+							}
+
+							var tempstr17 = parseInt(tempstr)+1;
+                            var strs17=tempstr17+strs;
+                            console.log(strs17)
+                                //2017
+								var option = {
+									title: {
+										left: 'center',
+										text: strs17
+									},
+									tooltip: {
+												trigger: "axis", 
+												axisPointer: {
+												type: "shadow"
+												},
+											}, 
+									legend: {
+										x: 'right',
+										data:['需求量']
+										
+									},
+									xAxis: {
+										data: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+									},
+									yAxis: {},
+									series: [{
+										name: '需求量',
+										type: 'bar',
+										data: List[0],
+										color:'rgb(255, 158, 68)'
+									}]
+								};
+
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option);
+							
+							//2016
+							var strs16= tempstr+strs
+							var option3 = {
+									title: {
+										left: 'center',
+										text: strs16,
+										subtext: "平均准确率："+List3[0],
+									},
+									tooltip: {
+												trigger: "axis", 
+												axisPointer: {
+												type: "shadow"
+												},
+											}, 
+									legend: {
+										x: 'right',
+										data:['需求量','准确率']
+										
+									},
+									xAxis: {
+										data: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+									},
+									yAxis: [
+											{
+											type: 'value',
+											name: '需求量',
+											position: 'left',
+											axisLine: {
+												lineStyle: {
+												}
+											},
+										},
+										{
+												type: 'value',
+												name: '准确率',
+												min: 0,
+												max: 100,
+												position: 'right',
+												axisLine: {
+													lineStyle: {
+													}
+												},
+												axisLabel: {
+													formatter: '{value} %'
+												}
+											}
+									
+									
+									],
+									series: [{
+										name: '需求量',
+										type: 'bar',
+										data: List2	
+									},
+									{
+										name: '准确率',		
+										type: 'line',
+										yAxisIndex: 1,
+										data: List4
+									}
+									
+									
+									]
+								};
+								myChart3.setOption(option3);
+							
+							
+							<!-- 多年数据-->
+
+
+							option2 = {
+								tooltip: {
+									trigger: 'axis',
+									position: function (pt) {
+										return [pt[0], '10%'];
+									}
+								},
+								title: {
+									left: 'center',
+									text: '历年需求量图',
+								},
+								toolbox: {
+									feature: {
+										dataZoom: {
+											yAxisIndex: 'none'
+										},
+										restore: {},
+										saveAsImage: {}
+									}
+								},
+								xAxis: {
+									type: 'category',
+									boundaryGap: false,
+									data: date
+								},
+								yAxis: {
+									type: 'value',
+									boundaryGap: [0, '100%']
+								},
+								dataZoom: [{
+									type: 'inside',
+									start: 0,
+									end: 10
+								}, {
+									start: 0,
+									end: 10,
+									handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+									handleSize: '80%',
+									handleStyle: {
+										color: '#fff',
+										shadowBlur: 3,
+										shadowColor: 'rgba(0, 0, 0, 0.6)',
+										shadowOffsetX: 2,
+										shadowOffsetY: 2
+									}
+								}],
+								series: [
+									{
+										name:'需求量',
+										type:'line',
+										smooth:true,
+										symbol: 'none',
+										sampling: 'average',
+										itemStyle: {
+											normal: {
+												color: 'rgb(255, 70, 131)'
+											}
+										},
+										areaStyle: {
+											normal: {
+												color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+													offset: 0,
+													color: 'rgb(255, 158, 68)'
+												}, {
+													offset: 1,
+													color: 'rgb(255, 70, 131)'
+												}])
+											}
+										},
+										data: data
+									}
+								]
+							};
+					myChart2.setOption(option2);
+					</script>
+ 
+							
+				</div>
+
+				
+<!-- script-for sticky-nav -->
+		<script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-main").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop(); 
+				if(scrollpos >=navoffeset){
+					$(".header-main").addClass("fixed");
+				}else{
+					$(".header-main").removeClass("fixed");
+				}
+			 });
+			 
+		});
+		</script>
+		<!-- /script-for sticky-nav -->
+<!--inner block start here-->
+<div class="inner-block">
+
+</div>
+<!--inner block end here-->
+<!--copy rights start here-->
+<div class="copyrights">
+	 <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="#"></a></p>
+</div>	
+<!--COPY rights end here-->
+</div>
+</div>
+  <!--//content-inner-->
+			<!--/sidebar-menu-->
+				<div class="sidebar-menu">
+					<header class="logo1">
+						<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
+					</header>
+						<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+                             <div class="menu">
+									<ul id="menu" >
+										<li><a href="/home"><i class="fa fa-tachometer"></i> <span>欢迎</span><div class="clearfix"></div></a></li>
+									<li id="menu-academico" ><a href="/uploadFile/report"><i class="fa fa-bar-chart"></i><span>库存预测系统</span><div class="clearfix"></div></a></li>
+									<li id="menu-academico" ><a href="/doc"><i class="fa fa-exclamation-triangle"></i><span>使用说明</span><div class="clearfix"></div></a></li>
+									 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> 附带工具</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+										   <ul id="menu-academico-sub" >
+										   <li id="menu-academico-avaliacoes" ><a href="icons.html">计算器</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="typography.html">日历</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="faq.html">备忘录</a></li>
+										  </ul>
+										</li>
+								  </ul>
+								</div>
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
+							<script>
+							var toggle = true;
+										
+							$(".sidebar-icon").click(function() {                
+							  if (toggle)
+							  {
+								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+								$("#menu span").css({"position":"absolute"});
+							  }
+							  else
+							  {
+								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+								setTimeout(function() {
+								  $("#menu span").css({"position":"relative"});
+								}, 400);
+							  }
+											
+											toggle = !toggle;
+										});
+							</script>
+<!--js -->
+<script src="../static/js/jquery.nicescroll.js"></script>
+<script src="../static/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+   <script src="../static/js/bootstrap.min.js"></script>
+   <!-- /Bootstrap Core JavaScript -->	   
+<!-- candlestick -->
+		<script type="text/javascript" src="../static/js/jquery.jqcandlestick.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/css/jqcandlestick.css" />
+		<!-- //candlestick -->
+</body>
+</html>

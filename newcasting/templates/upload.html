@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>欢迎光临</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+   <form enctype="multipart/form-data" method="POST" action="/uploadFile/report">
+       {% csrf_token %}
+       <input type="file" name="myfile" />
+       <br/>
+       {{ form }}
+       <input type="submit" value="upload"/>
+    </form>
+
+
+
+    <script type="text/javascript">
+
+        var List = {{ List|safe }};
+
+        $('#list').prepend(List[0]);
+        $('#list').append(List[1]);
+
+        console.log('--- 遍历 List 方法 1 ---')
+        for(i in List){
+            console.log(i);// i为索引
+        }
+
+        console.log('--- 遍历 List 方法 2 ---')
+        for (var i = List.length - 1; i >= 0; i--) {
+            // 鼠标右键，审核元素，选择 console 可以看到输入的值。
+            console.log(List[i]);
+        };
+
+        console.log('--- 同时遍历索引和内容，使用 jQuery.each() 方法 ---')
+        $.each(List, function(index, item){
+            console.log(index);
+            console.log(item);
+        });
+
+
+        // 字典
+        var Dict = {{ Dict|safe }};
+
+        console.log("---  遍历字典  ---");
+        for(i in Dict) {
+            console.log(i + Dict[i]);
+        }
+    </script>
+</body>
+</html>
+
